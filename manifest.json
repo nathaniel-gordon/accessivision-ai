@@ -1,0 +1,14 @@
+{
+  "name": "accessivision-ai",
+  "category": "Computer Vision & Multimodal Accessibility",
+  "architecture": "Fairness-constrained multi-task scene description and UI grounding model with demographic parity loss and Apple Neural Engine (ANE) CoreML acceleration",
+  "interface": "CLI + Web demo",
+  "testing": "Comprehensive multimodal evaluation suite (pytest tests -q)",
+  "demo_cmd": "python -c \"import accessivision; print('AccessiVision-AI runtime ready')\"",
+  "test_cmd": "pytest tests -q",
+  "entry_points": [
+    "accessivision/models/multimodal.py",
+    "accessivision/fairness/metrics.py",
+    "accessivision/cli.py"
+  ]
+}
