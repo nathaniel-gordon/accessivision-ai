@@ -1,0 +1,7 @@
+# Llama-3 70B (future)
+model: meta-llama/Meta-Llama-3-70B
+lora_rank: 16
+lora_alpha: 32
+use_qlora: True
+batch_size: 4
+grad_accum_steps: 16

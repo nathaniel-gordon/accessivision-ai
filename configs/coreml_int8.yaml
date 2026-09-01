@@ -1,0 +1,6 @@
+# CoreML export — INT8 palettisation
+quantization:
+  mode: int8_palettisation
+  block_size: 32
+  backends: [cpu_and_ne]
+  calibration_samples: 256

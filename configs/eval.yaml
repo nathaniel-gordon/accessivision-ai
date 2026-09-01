@@ -1,0 +1,13 @@
+diffusion_checkpoint: runs/diffusion/last.pt
+llm_checkpoint: runs/llm/last.pt
+
+dataset: data/eval_split.jsonl
+output: runs/eval/report.json
+
+metrics:
+  quality: ["clip_i", "fid", "bleurt"]
+  fairness: ["disparity_max", "disparity_mean"]
+
+fairness:
+  attributes: ["skin_tone", "gender_presentation", "age_bucket"]
+  bootstraps: 500

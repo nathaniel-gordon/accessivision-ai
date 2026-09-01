@@ -1,0 +1,45 @@
+model:
+  base: microsoft/Phi-3-mini-4k-instruct
+  vision_encoder: openai/clip-vit-large-patch14
+  projector_hidden: 2048
+  qlora:
+    r: 32
+    alpha: 64
+    dropout: 0.05
+    targets: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+  load_in_4bit: true
+
+data:
+  train_manifest: data/alttext_train.jsonl
+  val_manifest: data/alttext_val.jsonl
+  max_length: 1024
+  prompt_template: |
+    <|system|>
+    You generate rich, accessible descriptions of images for screen-reader users.
+    Prioritise factual content, spatial layout, and any text present. Avoid assumptions
+    about identity unless certain.<|end|>
+    <|image|>{image}<|end|>
+    <|user|>{instruction}<|end|>
+    <|assistant|>
+
+training:
+  epochs: 3
+  lr: 2.0e-4
+  weight_decay: 0.0
+  warmup_ratio: 0.03
+  grad_accum_steps: 8
+  batch_size: 2
+  mixed_precision: bf16
+  gradient_checkpointing: true
+  seed: 42
+  output_dir: runs/llm
+
+fairness:
+  enable: true
+  weight: 0.1
+  attributes: ["skin_tone", "gender_presentation", "age_bucket"]
+
+logging:
+  log_every: 25
+  val_every: 500
+  save_every: 1000

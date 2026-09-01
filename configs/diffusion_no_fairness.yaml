@@ -1,0 +1,4 @@
+# Diffusion ablation: no fairness regularizer
+base_config: configs/diffusion.yaml
+fairness_weight: 0.0
+name: diffusion_no_fairness
